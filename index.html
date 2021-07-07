@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Firebase database client side</title>
+     <!-- Compiled and minified CSS -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <div id="not-logged-in">
+            <form onsubmit="signUp(event)">
+                <label for="emailId">email ID</label><br>
+                <input type="text" name = "emailId" id ="emailId"><br>
+                <label for="firstName">First Name</label><br>
+                <input type="text" name = "firstName" id ="firstName"><br>
+                <label for="lastName">last Name</label><br>
+                <input type="text" name = "lastName" id ="lastName"><br>
+                <label for="streetName">Street Name</label><br>
+                <input type="text" name = "streetName" id ="streetName"><br>
+                <label for="houseNo">House No</label><br>
+                <input type="number" name="houseNo" id="houseNo"><br>
+                <label for="passWord">Password</label><br>
+                <input type="password" name="passWord" id="passWord"><br>
+                <input type="hidden" id="user-real-password" name="password"/>
+                <button id ="addBtn" class="btn waves-effect waves-light" type="submit" value="Register" >Add</button>
+                <button id ="updateBtn" class="btn waves-effect waves-light" >Update</button>
+                <button id ="removeBtn" class="btn waves-effect red darken-1" >Delete</button>
+            </form>
+        </div>
+        <div>
+            <h3>You are logged in now !</h3>
+            <Button onclick="logout()">Logout</Button>
+        </div>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-auth.js"></script>
+
+
+    <script>
+         var firebaseConfig = {
+    apiKey: "AIzaSyCm1-5Ne4Kbr_YRfb-HuPmrvG2Q_d4DonI",
+    authDomain: "postnotify-95f54.firebaseapp.com",
+    databaseURL: "https://postnotify-95f54-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "postnotify-95f54",
+    storageBucket: "postnotify-95f54.appspot.com",
+    messagingSenderId: "418075602051",
+    appId: "1:418075602051:web:834fbe662d8a5e75313fb6",
+    measurementId: "G-GE67LNXXJC"
+  };
+  firebase.initializeApp(firebaseConfig);
+    </script>
+    <script src="function.js"></script>
+</body>
+<!-- (A) LOAD CRYPTO JS LIBRARY -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+<script>
+// (B) ENCRYPT PASSWORD
+function crypt(){
+  // (B1) GET PASSWORD + ENCRYPT
+  var password = document.getElementById("passWord");
+  var cipher = CryptoJS.AES.encrypt(password.value, "545654");
+  cipher = cipher.toString();
+
+  // (B2) SET ENCRYPTED PASSWORD TO HIDDEN FIELD
+  document.getElementById("passWord").value = cipher;
+
+  // (B3) REMOVE CLEAR TEXT PASSWORD
+  password.value = "";
+
+  // (B4) SUBMIT FORM
+  return true;
+}
+</script>
+</html>
