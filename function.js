@@ -14,7 +14,7 @@ addBtn.addEventListener('click',(e) =>{
     e.preventDefault();
     
 
-    firebase.auth().createUserWithEmailAndPassword(emailId.value, passWord.value)
+  /*  firebase.auth().createUserWithEmailAndPassword(emailId.value, passWord.value)
     .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
@@ -28,7 +28,7 @@ addBtn.addEventListener('click',(e) =>{
         
     });
 
-    database.ref('/users/'+houseNo.value).set({
+    database.ref('/users/10').set({
         first_name: firstName.value,
         last_name: lastName.value,
         street_name: streetName.value,
@@ -40,11 +40,20 @@ addBtn.addEventListener('click',(e) =>{
 
     });
     alert(userCredential.user)
+    */
+    
+
+
 
 });
 
 
-
+exports.newNodeDetected = functions.database.ref('users/{userId}/first_name')
+.onCreate((snapshot,context) => {
+    var name = snapshot.val();
+    console.log(name);
+    return null;
+});
 
 
   function signUp(event){
