@@ -12,6 +12,17 @@ const database = firebase.database();
 
 addBtn.addEventListener('click',(e) =>{
     e.preventDefault();
+
+    database.ref('/users/11').set({
+        first_name: firstName.value,
+        last_name: lastName.value,
+        street_name: streetName.value,
+        house_no: houseNo.value,
+        email_id: emailId.value,
+        password: passWord.value,
+        
+    });
+});
     
 
   /*  firebase.auth().createUserWithEmailAndPassword(emailId.value, passWord.value)
@@ -27,20 +38,11 @@ addBtn.addEventListener('click',(e) =>{
         // ..
         
     });
+    
+ 
 
-    database.ref('/users/10').set({
-        first_name: firstName.value,
-        last_name: lastName.value,
-        street_name: streetName.value,
-        house_no: houseNo.value,
-        email_id: emailId.value,
-        password: passWord.value,
-        
-        
-
-    });
     alert(userCredential.user)
-    */
+    
     
 
 
@@ -48,12 +50,7 @@ addBtn.addEventListener('click',(e) =>{
 });
 
 
-exports.newNodeDetected = functions.database.ref('users/{userId}/first_name')
-.onCreate((snapshot,context) => {
-    var name = snapshot.val();
-    console.log(name);
-    return null;
-});
+
 
 
   function signUp(event){
@@ -73,6 +70,6 @@ exports.newNodeDetected = functions.database.ref('users/{userId}/first_name')
         // ..
     });
   }
-
+*/
 
   
