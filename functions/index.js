@@ -21,13 +21,14 @@ exports.makeLppercase = functions.database.ref("/messages/{pushId}/original")
       return snapshot.ref.parent.child("upper").set(uppercase);
     });
 
+
 exports.newNodeDetected = functions.database.ref("User/{userId}/Notify")
     .onWrite((change, context) => {
       const newval = change.after.val();
       if (newval) {
         rootRef.on("value", (snapshot) => {
           const emailadd = snapshot.child("U1/emailss").val();
-          const nodemailer = require("nodemailer");
+          /* const nodemailer = require("nodemailer");
           const transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
@@ -47,7 +48,8 @@ exports.newNodeDetected = functions.database.ref("User/{userId}/Notify")
             } else {
               console.log("email sent");
             }
-          });
+          }); */
+          
           return database.ref("metadata/lc/").set(emailadd);
         });
       }
