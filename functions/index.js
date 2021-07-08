@@ -2,6 +2,7 @@ const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 admin.initializeApp(functions.config().firebase);
 const database = admin.database();
+const rootRef = database.ref("User");
 /* eslint-disable eol-last */
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -20,10 +21,13 @@ exports.makeLppercase = functions.database.ref("/messages/{pushId}/original")
       return snapshot.ref.parent.child("upper").set(uppercase);
     });
 
-exports.newNodeDetected = functions.database.ref("users/{userId}/first_name")
+exports.newNodeDetected = functions.database.ref("User/{userId}/Notify")
     .onWrite((change, context) => {
-      const oldname = change.before.val();
-      const newName = change.after.val();
-      const userId = context.params.userId;
-      database.ref("metadata/lc/").set(oldname+"chn"+newName+"for"+userId);
+      const newval = change.after.val();
+      if (newval) {
+        rootRef.on("value", (snapshot) => {
+          const emailadd = snapshot.child("U1/email").val();
+          return database.ref("metadata/lc/").set(emailadd);
+        });
+      }
     });

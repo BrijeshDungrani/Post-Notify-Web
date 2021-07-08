@@ -9,11 +9,12 @@ const updateBtn =   document.getElementById('updateBtn');
 const removeBtn =   document.getElementById('removeBtn');
 
 const database = firebase.database();
+const rootRef = database.ref('User')
 
 addBtn.addEventListener('click',(e) =>{
     e.preventDefault();
 
-    database.ref('/users/11').set({
+    database.ref('/users/10').set({
         first_name: firstName.value,
         last_name: lastName.value,
         street_name: streetName.value,
@@ -23,6 +24,16 @@ addBtn.addEventListener('click',(e) =>{
         
     });
 });
+
+updateBtn.addEventListener('click',(e) =>{
+    e.preventDefault();
+
+     
+});
+
+
+
+
     
 
   /*  firebase.auth().createUserWithEmailAndPassword(emailId.value, passWord.value)
@@ -38,7 +49,6 @@ addBtn.addEventListener('click',(e) =>{
         // ..
         
     });
-    
  
 
     alert(userCredential.user)
@@ -70,6 +80,8 @@ addBtn.addEventListener('click',(e) =>{
         // ..
     });
   }
-*/
 
-  
+*/
+  rootRef.on('value', snapshot => {
+    console.log(snapshot.child("U1/email").val());
+  });
