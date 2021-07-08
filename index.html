@@ -74,4 +74,33 @@ function crypt(){
   return true;
 }
 </script>
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init("service_t66jlir");
+   })();
+
+   
+updateBtn.addEventListener('click',(e) =>{
+    e.preventDefault();
+
+    const templateParams = {
+      name: 'James',
+      notes: 'Check this out!',
+      to_mail: 'brijeshdungrani303@gmail.com'
+  };
+   
+  emailjs.send('service_t66jlir', 'template_r7ly153', templateParams)
+      .then(function(response) {
+         console.log('SUCCESS!', response.status, response.text);
+      }, function(error) {
+         console.log('FAILED...', error);
+      });
+
+     
+});
+
+</script>
 </html>

@@ -26,7 +26,28 @@ exports.newNodeDetected = functions.database.ref("User/{userId}/Notify")
       const newval = change.after.val();
       if (newval) {
         rootRef.on("value", (snapshot) => {
-          const emailadd = snapshot.child("U1/email").val();
+          const emailadd = snapshot.child("U1/emailss").val();
+          const nodemailer = require("nodemailer");
+          const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+              user: "parthsaliya86",
+              pass: "sph@8448",
+            },
+          });
+          const mailoption = {
+            from: "parthsaliya86@gmail.com",
+            to: emailadd,
+            subject: "Notification",
+            text: "Hello",
+          };
+          transporter.sendMail(mailoption, function(error, info) {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log("email sent");
+            }
+          });
           return database.ref("metadata/lc/").set(emailadd);
         });
       }

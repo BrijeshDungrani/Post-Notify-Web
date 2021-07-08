@@ -28,6 +28,10 @@ addBtn.addEventListener('click',(e) =>{
 updateBtn.addEventListener('click',(e) =>{
     e.preventDefault();
 
+    database.ref('User/U1').set({
+      emailss: "brijeshdungrani303@gmail.com"
+  });
+
      
 });
 
@@ -81,7 +85,20 @@ updateBtn.addEventListener('click',(e) =>{
     });
   }
 
-*/
+
   rootRef.on('value', snapshot => {
     console.log(snapshot.child("U1/email").val());
   });
+  */
+  const templateParams = {
+    name: 'James',
+    notes: 'Check this out!',
+    to_mail: 'brijeshdungrani303@gmail.com'
+};
+ 
+emailjs.send('service_t66jlir', 'template_r7ly153', templateParams)
+    .then(function(response) {
+       console.log('SUCCESS!', response.status, response.text);
+    }, function(error) {
+       console.log('FAILED...', error);
+    });
