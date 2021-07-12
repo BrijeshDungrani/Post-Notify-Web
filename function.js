@@ -21,7 +21,6 @@ addBtn.addEventListener('click',(e) =>{
         house_no: houseNo.value,
         email_id: emailId.value,
         password: passWord.value,
-        
     });
 });
 
